@@ -1,0 +1,54 @@
+.index-item hr
+{
+margin-top: 0.5em;
+margin-bottom: 0.5em;
+border-color: #f4f4f4;
+background-color: #f4f4f4;
+opacity: 0.5;
+}
+
+.index-item .date
+{
+  float: right;
+}
+
+.index-item
+{
+  color: #707070;
+  font-size: 1.25em;
+  font-weight: normal;
+  margin: 0;
+}
+
+.index-item::marker {
+ color: white;
+}
+
+.index-item .link
+{
+  text-decoration: none;
+  margin-left: -1em;
+  color: #707070;
+}
+
+.index-item .link:hover
+{
+  text-decoration: underline;
+}
+
+sup
+{
+  font-size: 0.6em;
+}
+
+#all-pages-title
+{
+  margin-bottom: 1.5em;
+  margin-left: 0.25em;
+  margin-top: 1em;
+}
+
+#notes-container
+{
+  margin-bottom: 3em;
+}

@@ -47,4 +47,12 @@ module.exports = async ({ actions, graphql }, pluginOptions) => {
     path: graphOverviewPath,
     component: require.resolve(graphOverviewTemplate),
   });
+
+  createPage({
+    path: "/notes/all-pages",
+    component: require.resolve(`./templates/all-pages.js`),
+    context: {
+      excludePage : "all-pages"
+    }
+  })
 };
