@@ -16,6 +16,13 @@ If you encounter an error along the lines of `content.matchAll(...) is not a fun
   Tags are "linkified" and extracted when they are in the frontmatter, separate pages are created for each tag so they can be backlinked as well.
 - Custom styling
 
+## Options
+rootPath: "notes/",
+rootNote: "index",
+notesDirectory: "content/notes/",
+graphOverviewPath: "notes/graph-overview",
+linkifyHashtags: true,
+
 
 ## Usage
 
