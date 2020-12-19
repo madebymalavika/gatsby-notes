@@ -1,9 +1,5 @@
 # Gatsby Notes
 
-### Note: This Theme Requires NodeJS v12
-
-If you encounter an error along the lines of `content.matchAll(...) is not a function`, you will need to update your version of node to version 12.
-
 ## Original Features
 - Double square bracket linking
 - Case insensitivity
@@ -14,9 +10,10 @@ If you encounter an error along the lines of `content.matchAll(...) is not a fun
   [[All Pages]] directs you to a single page within the root folder that contains a list of all the written and created pages. Date and number of times that page has been referred are displayed.
 - Extract Tags from Frontmatter
   Tags are "linkified" and extracted when they are in the frontmatter, separate pages are created for each tag so they can be backlinked as well.
-- Custom styling
+- Created a display name for all the pages so title and references are not  shown as the "slug"
+- Custom styling CSS
 
-## Options
+## Current Options
 rootPath: "notes/",
 rootNote: "index",
 notesDirectory: "content/notes/",
@@ -49,3 +46,8 @@ linkifyHashtags: true,
 | `brainMapPath`           | "static/brainmap.json"                  | Set the path on your site where the brainmap json file will be generated                                                                                                                                                                          |
 | `mappedExternalBrains`   | {}                                      | Set to an object mapping from a name that will be used in the links (e.g. [[name/somepage]]), to the url for the external brainmap                                                                                                                |
 | `timerReloadDelay`       | 0                                       | Change to something greater than 0 to enable automatic reloading of the map. This is useful when subscribed to other sites to regenerate those references. Value is in milliseconds, so 6000000 would regenerate your site every 10 minutes.      |
+
+
+### Note: This Theme Requires NodeJS v12
+
+If you encounter an error along the lines of `content.matchAll(...) is not a function`, you will need to update your version of node to version 12.
