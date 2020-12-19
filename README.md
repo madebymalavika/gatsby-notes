@@ -1,4 +1,4 @@
-# Gatsby-Theme-Brain Spinoff
+# Gatsby Notes
 
 ### Note: This Theme Requires NodeJS v12
 
@@ -9,7 +9,7 @@ If you encounter an error along the lines of `content.matchAll(...) is not a fun
 - Case insensitivity
 - Add Frontmatter for titles and aliases
 
-##Added Features
+## Added Features
 - All Pages component
   [[All Pages]] directs you to a single page within the root folder that contains a list of all the written and created pages. Date and number of times that page has been referred are displayed.
 - Extract Tags from Frontmatter
