@@ -1,127 +1,21 @@
-# Gatsby Brain
-
-Use this theme to integrate [Roam Research](https://roamresearch.com/) inspired bidirectional linking of notes into a network on your site.
-
-View a demo at https://twitter.com/aengusmcmillin/status/1249845320239984640
+# Gatsby-Theme-Brain Spinoff
 
 ### Note: This Theme Requires NodeJS v12
 
 If you encounter an error along the lines of `content.matchAll(...) is not a function`, you will need to update your version of node to version 12.
 
-## Features
+## Original Features
+- Double square bracket linking
+- Case insensitivity
+- Add Frontmatter for titles and aliases
 
-### Double square bracket linking
+##Added Features
+- All Pages component
+  [[All Pages]] directs you to a single page within the root folder that contains a list of all the written and created pages. Date and number of times that page has been referred are displayed.
+- Extract Tags from Frontmatter
+  Tags are "linkified" and extracted when they are in the frontmatter, separate pages are created for each tag so they can be backlinked as well.
+- Custom styling
 
-This is the core feature of the plugin. Based on the model developed by Roam Research, the way it works is that any piece of text wrapped in double square brackets (for example [[some idea]]) will turn into a link to a page. If the page already exists in the graph it will link to that, and if not it will create the page. And when generating that page, a reference is created back to any files that link to it.
-
-This means that you can create pages without any files backing them. They won't have any content, but they will still have the associated backlinks, which makes it incredibly easy to start linking together different notes and references based on common ideas.
-
-For example, lets say you were writing a couple of book reviews on your site. You might create a note for each book as individual markdown files. Now, you could also create a 'books.md' file and add in links to all of your book reviews, but that would be a hassle. Instead, you can simply add something `Tags: [[Books]]` to the top of the each book as you create those notes, and a Books page will be automatically generated containing links to every one of your book reviews!
-
-### Case insensitivity
-
-This is one variation from Roam. In Roam, everything is case sensitive, so if you use [[Book]] and [[book]], those will link to two different places. Because of the way this theme works it didn't make sense to keep that behavior, and I personally get frustrated with it more often than not. So this theme is case insensitive. That means linking to [[Book]], [[BOOK]], and [[book]] all go to the same place.
-
-### Add Frontmatter for titles and aliases
-
-When generating a page from markdown, by default the title of the page will simply be the slug (filename minus extension) of the file. This is often not going to be exactly what you want due to the present of dashes and differences in capitalization. To fix this, you can add frontmatter to your markdown files with the `title` field filled in.
-
-For example:
-
-```
----
-title: "Some Great Idea I Had"
----
-```
-
-And there is also a feature that isn't in Roam but can help a little bit with making a Public Brain more readable. It is another attribute of frontmatter called aliases. If you pass an array of strings to `aliases`, during the generation of the graph any double bracketed phrases that match one of those aliases will be linked to that note.
-
-This can be useful for shorthands, plurals, or common misspellings. My favorite way is definitely for plurals so far though. Between this and the case insensitivity, it means you can easily set it up so that, for example, despite having a 'Books' page, you can easily write something like: "Lord of the Rings is a really good [[book]]", and not force yourself to rewrite it as "Lord of the Rings is a really good [[Books]]" for the sake of linking.
-
-You would just make sure that your books markdown file has something like this at the top:
-
-```
----
-title: "Books"
-aliases: ["book"]
----
-```
-
-## Installation
-
-To use this theme in your Gatsby site:
-
-1. Install the theme
-
-```
-npm install --save @aengusm/gatsby-theme-brain
-```
-
-2. Add the theme to your `gatsby-config.js`:
-
-```
-module.exports = {
-  plugins: ['@aengusm/gatsby-theme-brain'],
-};
-```
-
-3. Add content to Your Brain by creating a content/brain/ folder in the root of your site and adding markdown files to it. Use [[This Format]] to generate pages and links between pages.
-
-4. Start your site:
-
-```
-gatsby develop
-```
-
-## Styling
-
-For now the way to style this theme is with [component shadowing](https://www.gatsbyjs.org/blog/2019-04-29-component-shadowing/). There is a single component that renders the layout for each brain note in src/components/BrainNote.js. If you wish to shadow this and create your own version, create the file src/@aengusm/gatsby-theme-brain/components/BrainNote.js. That will shadow the existing component and you can do whatever you want with it.
-
-If you want an example of how I shadow this, checkout my [websites github](https://github.com/aengusmcmillin/aengusmcmillin.com/blob/master/src/%40aengusm/gatsby-theme-brain/components/BrainNote.js)
-
-### Extending the GraphOverview component
-
-If you want to modify the Graph Overview page you can do so by [extending](https://www.gatsbyjs.org/docs/theme-api/#extending) the `GraphOverview` component.
-
-Here's an example of extending the component to fill the parent and be responsive to the current theme:
-
-```js
-// src/@aengusm/gatsby-theme-brain/components/GraphOverview.js
-
-import GraphOverview from "@aengusm/gatsby-theme-brain/src/components/GraphOverview";
-import React from "react";
-import { useColorMode } from "@chakra-ui/core";
-
-import SEO from "../../../components/SEO";
-import Layout from "../../../components/Layout";
-
-export default (props) => {
-  const { colorMode } = useColorMode();
-
-  return (
-    <Layout>
-      <SEO title="Graph Overview" />
-      <GraphOverview
-        style={{ width: "100%", height: "100%" }}
-        stylesheet={[
-          {
-            selector: "node",
-            style: {
-              label: "data(label)",
-              color: colorMode === "light" ? "#000000" : "#ffffff",
-              backgroundColor: "#545454",
-              "text-wrap": "wrap",
-              "text-max-width": 100,
-              "font-size": 12,
-            },
-          },
-        ]}
-        {...props}
-      />
-    </Layout>
-  );
-};
-```
 
 ## Usage
 
