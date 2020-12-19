@@ -11,16 +11,23 @@ export const query = graphql`
     brainNote(slug: { eq: $slug }) {
       slug
       title
+      date
       externalInboundReferences {
         siteName
         sourcePage
         sourceUrl
         previewHtml
       }
+      linkifiedTags
+      {
+        hashtag
+        sourceUrl
+      }
       inboundReferences
       inboundReferencePreviews {
         source
         previewHtml
+        name
       }
       childMdx {
         body

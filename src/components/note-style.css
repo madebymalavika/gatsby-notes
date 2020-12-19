@@ -1,0 +1,478 @@
+html
+{
+  font-family: 'helvetica neue';
+  font-weight: regular;
+  line-height: 1.5;
+  padding: 24px 10% 24px 10%;
+  font-size: 16px;
+  text-rendering: geometricPrecision;
+  /* text-rendering: optimizeLegibility; */
+}
+
+.content
+{
+  margin-top: 5em;
+  /*margin-top: 2.5em;*/
+}
+
+.container-left
+{
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+
+.container-right
+{
+  width: 50%;
+  height: 100%;
+  float: right;
+  color: #707070;
+}
+
+#child-body
+{
+  margin-top: 4px;
+  margin-bottom: 2em;
+}
+
+
+#note-title
+{
+  position: fixed;
+  max-width: 45%;
+}
+
+.meta-data
+{
+  position: fixed;
+  bottom: 2em;
+  letter-spacing: 0.2px;
+  max-width: 45%;
+}
+
+.meta-data a
+{
+  color: #707070 ;
+  text-decoration: none;
+}
+
+.meta-data a:hover
+{
+  text-decoration: underline;
+}
+
+.reference-block
+{
+  background-color: #f4f4f4;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  padding-right: 2em;
+  line-height: 1.75em;
+}
+
+hr
+{
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+border-color: #f4f4f4;
+background-color: #f4f4f4;
+opacity: 0.5;
+}
+
+h1
+{
+  color: #222222;
+  font-weight: regular;
+  font-weight: 400;
+  font-size: 1.75em;
+  margin: 0;
+  letter-spacing: 0.4px;
+}
+
+h2
+{
+  color: #707070;
+  font-size: 1.5em;
+  font-weight: normal;
+  margin: 0;
+}
+
+h3
+{
+  color: #707070;
+  font-size: 1.25em;
+  font-weight: normal;
+  margin: 0;
+}
+
+h4
+{
+  color: #707070;
+  font-size: 1.15em;
+  font-weight: normal;
+  margin: 0;
+
+}
+
+ul
+{
+  list-style-type: disc;
+}
+
+li
+{
+  margin-top: 0.25em;
+}
+
+/* .contains-task-list
+{
+  margin-left: -1.5em;
+} */
+
+.contains-task-list li::marker {
+  color: white;
+}
+
+p
+{
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+a
+{
+    color: #000;
+    text-decoration: underline;
+}
+
+a:hover
+{
+  text-decoration: none;
+}
+
+blockquote
+{
+  border-left-style: solid;
+  border-left-width: 4px;
+  border-left-color: #f4f4f4;
+  padding-left: 1em;
+  margin-left: 1.5em;
+}
+
+.reference-block blockquote
+{
+  border-left-color: #cccccc;
+}
+
+.reference-block .contains-task-list li::marker {
+  color: #f4f4f4;
+}
+
+strong
+{
+  color: #707070;
+  font-weight: 600;
+}
+
+.header-home {
+  position: fixed;
+  top: 0;
+  width: calc(96vw - 24px);
+  background-color: white;
+  padding: 1.5rem 1.5rem 1.5rem 0;
+  z-index: 2;
+}
+
+.header-link a {
+  color: #707070;
+  text-decoration: none;
+}
+
+.header-link a:hover {
+  /* color: #222; */
+  text-decoration: underline;
+}
+
+.header-right
+{
+  list-style: none;
+  float: right;
+  margin-top: 0;
+}
+
+.about-para
+{
+  max-width: 48vw;
+}
+
+@media only screen and (max-width: 1440px)
+{
+  html
+  {
+    padding: 20px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  html
+  {
+      padding: 2.5em;
+  }
+
+  .container-left
+  {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .container-right
+  {
+    position: relative;
+    width: 100%;
+    color: #707070;
+    margin-top: -0.5em;
+  }
+
+  #note-title
+  {
+    position: relative;
+    max-width: 100%;
+  }
+
+  .meta-data
+  {
+    position: relative;
+    letter-spacing: 0px;
+    max-width: 100%;
+    margin-top: 2.5em;
+  }
+
+  .meta-data h2
+  {
+    font-size: 1.25em;
+  }
+
+  .reference-block
+  {
+    background-color: #f4f4f4;
+    margin-top: 0em;
+    margin-bottom: 1em;
+    padding: 0.75em;
+    padding-right: 1.5em;
+    line-height: 1.75em;
+  }
+
+  ul
+  {
+    padding-left: 36px;
+  }
+
+  li ul
+  {
+    padding-left: 18px;
+  }
+
+  blockquote
+  {
+    border-left-style: solid;
+    border-left-width: 4px;
+    border-left-color: #f4f4f4;
+    padding-left: 18px;
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+  .header-home {
+    position: fixed;
+    top: 0;
+    width: calc(96vw - 24px);
+    background-color: white;
+    padding: 1.5rem 1.5rem 0.5rem 0;
+    z-index: 2;
+  }
+
+  .header-right
+  {
+    list-style: none;
+    float: none;
+    margin-top: 0;
+    padding-left: 0px;
+  }
+
+  .about-para
+  {
+    max-width: 98vw;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  html
+  {
+      padding: 1em;
+  }
+
+  .container-left
+  {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .container-right
+  {
+    position: relative;
+    width: 100%;
+    color: #707070;
+    margin-top: -0.5em;
+  }
+
+  #note-title
+  {
+    position: relative;
+    max-width: 100%;
+  }
+
+  .meta-data
+  {
+    position: relative;
+    letter-spacing: 0px;
+    max-width: 100%;
+    margin-top: 2.5em;
+  }
+
+  .meta-data h2
+  {
+    font-size: 1.25em;
+  }
+
+  .reference-block
+  {
+    background-color: #f4f4f4;
+    margin-top: 0em;
+    margin-bottom: 1em;
+    padding: 0.75em;
+    padding-right: 1.5em;
+    line-height: 1.75em;
+  }
+
+  h1
+  {
+    letter-spacing: 0px;
+  }
+
+  ul
+  {
+    padding-left: 36px;
+  }
+
+  li ul
+  {
+    padding-left: 18px;
+  }
+
+  blockquote
+  {
+    border-left-style: solid;
+    border-left-width: 4px;
+    border-left-color: #f4f4f4;
+    padding-left: 18px;
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+  .header-home {
+    position: fixed;
+    top: 0;
+    width: calc(96vw - 24px);
+    background-color: white;
+    padding: 1rem 1.5rem 0rem 0;
+    z-index: 2;
+  }
+
+  .header-home a {
+    font-size: 20px;
+  }
+
+  .header-right
+  {
+    list-style: none;
+    float: none;
+    margin-top: -10px;
+    padding-left: 0px;
+  }
+
+  .about-para
+  {
+    max-width: 98vw;
+  }
+
+}
+
+::selection {
+    background: rgb(225, 225, 225) ;
+}
+
+.footer
+{
+  bottom: 20px;
+}
+
+/* .header-home a:hover
+{
+  color: #000;
+} */
+
+/* All Pages CSS */
+
+/* .index-item hr
+{
+margin-top: 0.75em;
+margin-bottom: 0.75em;
+border-color: #f4f4f4;
+background-color: #f4f4f4;
+opacity: 0.5;
+}
+
+.index-item .date
+{
+  float: right;
+}
+
+.index-item
+{
+  color: #707070;
+  font-size: 1.25em;
+  font-weight: normal;
+  margin: 0;
+}
+
+.index-item::marker {
+ color: white;
+}
+
+.index-item .link
+{
+  text-decoration: none;
+  margin-left: -1em;
+  color: #707070;
+}
+
+.index-item .link:hover
+{
+  text-decoration: underline;
+}
+
+sup
+{
+  font-size: 0.6em;
+}
+
+#all-pages-title
+{
+  margin-bottom: 1.5em;
+  margin-left: 0.25em;
+  margin-top: 1em;
+} */

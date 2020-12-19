@@ -255,6 +255,11 @@ function generateNodes(
     pluginOptions,
     externalMapsParsed
   );
+  console.log("Shadowed source-node.js");
+
+
+  //console.log("Name to slug" , nameToSlugMap);
+  //console.log("Slug to Note", slugToNoteMap);
 
   let brainBaseUrl = pluginOptions.brainBaseUrl || "";
   let externalInboundReferences = new Map();
@@ -301,10 +306,13 @@ function generateNodes(
           : generateSlug(lower);
 
         if (nameToSlugMap[slug] == null) {
+
+          text = text.length ? text.charAt(0).toUpperCase() + text.slice(1) : " ";
+
           // Double check that the slugified version isn't already there
           slugToNoteMap[slug] = {
             slug: slug,
-            title: slug,
+            title: text, /*slug,*/
             content: "",
             rawContent: "",
             frontmatter: {
@@ -316,6 +324,8 @@ function generateNodes(
             inboundReferences: [],
             externalOutboundReferences: [],
           };
+
+          //console.log("Slug to Note Map", slugToNoteMap[slug].title, "," , slugToNoteMap[source].title);
           nameToSlugMap[slug] = slug;
         }
 
@@ -326,9 +336,11 @@ function generateNodes(
       if (backlinkMap[slug] == null) {
         backlinkMap[slug] = [];
       }
+
       backlinkMap[slug].push({
         source: source,
         previewMarkdown: previewMarkdown,
+        name: slugToNoteMap[source].title
       });
     });
 
@@ -369,6 +381,23 @@ function generateNodes(
       pluginOptions
     );
 
+    const linkifiedTags = [
+    ];
+
+    if( note.frontmatter.tags && note.frontmatter.tags.length){
+      let tags = note.frontmatter.tags;
+      tags.forEach((tag) => {
+        //Remove the #from the tag
+        let linkifiedTag =
+        {
+          hashtag: tag,
+          sourceUrl: path.join("/", rootPath, "/", tag.substring(1))
+        }
+        linkifiedTags.push(linkifiedTag);
+        });
+    }
+    //console.log(linkifiedTags);
+
     const brainNoteNode = {
       id: createNodeId(`${slug} >>> BrainNote`),
       title: note.title,
@@ -378,6 +407,8 @@ function generateNodes(
       absolutePath: note.fullPath,
       noteTemplate: note.noteTemplate,
       aliases: note.aliases,
+      linkifiedTags: linkifiedTags,
+      date: note.frontmatter.date,
       children: [],
       parent: null,
       internal: {
@@ -397,12 +428,15 @@ function generateNodes(
     brainNoteNode.outboundReferences = [...new Set(outboundReferenceSlugs)];
 
     let inboundReferences = backlinkMap[slug] || [];
+    //console.log(inboundReferences);
+
+
     let inboundReferenceSlugs = inboundReferences.map(({ source }) => source);
     brainNoteNode.inboundReferences = inboundReferenceSlugs.filter(
       (a, b) => inboundReferenceSlugs.indexOf(a) === b
     );
     brainNoteNode.inboundReferencePreviews = inboundReferences.map(
-      ({ source, previewMarkdown }) => {
+      ({ source, previewMarkdown , name}) => {
         let linkifiedMarkdown = insertLinks(
           previewMarkdown,
           nameToSlugMap,
@@ -417,8 +451,12 @@ function generateNodes(
           .use(html)
           .processSync(linkifiedMarkdown)
           .toString();
+
+
+
         return {
           source: source,
+          name: name,
           previewMarkdown: linkifiedMarkdown,
           previewHtml: previewHtml,
         };
@@ -527,10 +565,12 @@ function processMarkdownNotes(
     var tree = unified().use(markdown).parse(content);
 
     let title = slug;
+    let displayName = "Display Name";
     nameToSlugMap[slug] = slug;
 
     if (frontmatter.title != null) {
       title = frontmatter.title;
+      displayName = frontmatter.title;
       nameToSlugMap[frontmatter.title.toLowerCase()] = slug;
     }
 
@@ -557,18 +597,42 @@ function processMarkdownNotes(
     // e.g. [[Test]] -> Test
     const regex = /(?<=\[\[).*?(?=\]\])/g;
     let outboundReferences = [...content.matchAll(regex)] || [];
+    //console.log("Outbound" , outboundReferences);
+
     if (pluginOptions.linkifyHashtags) {
       const hashtagRegexExclusive = /(?<=(^|\s)#)\w*\b/g;
       let hashtagReferences =
         [...content.matchAll(hashtagRegexExclusive)] || [];
       outboundReferences = outboundReferences.concat(hashtagReferences);
+
+      if(frontmatter.tags && frontmatter.tags.length)
+      {
+          //console.log(slug);
+          let tags = frontmatter.tags;
+          tags.forEach((tag)=>{
+            //console.log("Tag" , tag );
+            let hashtagReferences =
+              [...tag.matchAll(hashtagRegexExclusive)] || [];
+            //console.log("HashTagRef " + hashtagReferences);
+          outboundReferences = outboundReferences.concat(hashtagReferences);
+
+          });
+      }
+
     }
+
+    //console.log("OutBoundReferences" , outboundReferences);
     let internalReferences = [];
     let externalReferences = [];
+
     // outboundReferences =
     outboundReferences.forEach((match) => {
+
+      //console.log("OutboundReference", match);
       let text = match[0];
       let start = match.index;
+      //console.log("Start", start);
+
       let { parent } = findDeepestChildForPosition(null, tree, start);
       // Adding this logic to avoid including too large an amount of content. May need additional heuristics to improve this
       // Right now it essentially will just capture the bullet point or paragraph where it is mentioned.
@@ -588,6 +652,14 @@ function processMarkdownNotes(
         .use(textNoEscaping)
         .freeze();
       let previewMarkdown = processor.stringify(parent.node);
+      if (start == 1)
+      {
+        // console.log("match", match);
+        if (frontmatter.tags != null)
+        {
+          previewMarkdown = "Tags: " + frontmatter.tags.join(" ");
+        }
+      }
 
       const externalRefMatch = /(.*)\/(.*)/;
       let externalRef = text.match(externalRefMatch);
@@ -621,6 +693,7 @@ function processMarkdownNotes(
 
     slugToNoteMap[slug] = {
       title: title,
+      displayName: displayName,
       content: rawFile,
       rawContent: rawFile,
       fullPath: fullPath,

@@ -8,7 +8,10 @@ module.exports = ({ actions }) => {
       rawContent: String
       content: String
       noteTemplate: String
+      displayName: String
+      date: String
       aliases: [String]
+      linkifiedTags: [LinkifiedTags]
       outboundReferences: [String]
       outboundReferenceNotes: [BrainNote] @link(from: "outboundReferenceNotes___NODE")
       inboundReferences: [String]
@@ -17,6 +20,15 @@ module.exports = ({ actions }) => {
       externalInboundReferences: [ExternalInboundReference]
       externalOutboundReferences: [ExternalOutboundReference]
       childMdx: Mdx
+    }
+
+    type OutBoundReferences {
+      reference: String!
+      displayName: String!
+    }
+    type LinkifiedTags{
+      hashtag: String!
+      sourceUrl: String!
     }
 
     type ExternalInboundReference {
