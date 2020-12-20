@@ -2,8 +2,6 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import MDXRenderer from "gatsby-plugin-mdx/mdx-renderer";
 import "./note-style.css"
-import Layout from "../../../components/layout"
-
 
 //function to replace hyphens and capitalize first letter of every word
     // function display(str)
@@ -71,7 +69,6 @@ const BrainNote = ({ note }) => {
 
 
   return (
-<Layout>
 <div>
     <Helmet>
       <title>
@@ -94,7 +91,6 @@ const BrainNote = ({ note }) => {
       </div>
     </div>
 </div>
-</Layout>
   );
 };
 
